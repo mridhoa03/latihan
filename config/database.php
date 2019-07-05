@@ -48,7 +48,7 @@ return [
             'url' => env('DATABASE_URL'),
             'host' => env('DB_HOST', 'db4free.net'),
             'port' => env('DB_PORT', '3306'),
-            'database' => env('DB_DATABASE', 'pkl_Ridho'),
+            'database' => env('DB_DATABASE', 'pkl_ridho'),
             'username' => env('DB_USERNAME', 'mridhoa'),
             'password' => env('DB_PASSWORD', 'mridhoa03'),
             'unix_socket' => env('DB_SOCKET', ''),
