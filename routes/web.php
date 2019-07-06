@@ -15,6 +15,12 @@ Route::get('/', function () {
     return view('index');
 });
 
+
+Route::get('/archive-grid', function () {
+    return view('/archive-grid');
+});
+
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
