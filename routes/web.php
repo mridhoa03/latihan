@@ -33,3 +33,7 @@ Route::get('/regular', function () {
 Route::get('/contact', function () {
     return view('contact');
 });
+
+route::resource('kategori','KategoriController');
+route::resource('artikel','ArtikelController');
+route::resource('tag','TagController');

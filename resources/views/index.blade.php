@@ -2829,6 +2829,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 
     <!-- jQuery (Necessary for All JavaScript Plugins) -->
     <script src="{{ asset('assets/frontend/js/jquery/jquery-2.2.4.min.js')}}"></script>
+    <script src="{{ asset('assets/frontend/js/json.js')}}"></script>
     <!-- Popper js -->
     <script src="{{ asset('assets/frontend/js/popper.min.js')}}"></script>
     <!-- Bootstrap js -->
