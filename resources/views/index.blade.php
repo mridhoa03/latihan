@@ -56,6 +56,15 @@
                                 <li class="nav-item">
                                     <a class="nav-link" href="contact">Contact</a>
                                 </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="/admin/artikel">Artikel</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="/admin/kategori">Kategori</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="/admin/tag">Tag</a>
+                                </li>
                             </ul>
                             <!-- Search Form  -->
                             <div id="search-wrapper">

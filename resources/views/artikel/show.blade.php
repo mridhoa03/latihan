@@ -1,11 +1,5 @@
 @extends('layouts.app')
 
-@section('js')
-    <script>
-        CKEDITOR.replace( 'editor1' );
-    </script>
-@endsection
-
 @section('content')
 <section class="page-content container-fluid">
     <div class="row">
