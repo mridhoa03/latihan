@@ -19,6 +19,7 @@ class CreateArtikelsTable extends Migration
             $table->String('slug');
             $table->text('konten');
             $table->String('foto');
+            $table->unsignedBigInteger('id_user');
             $table->unsignedBigInteger('id_kategori');
             $table->timestamps();
         });

@@ -7,6 +7,7 @@ use App\Kategori;
 use App\Tag;
 use App\Artikel;
 use Session;
+use Auth;
 use File;
 
 class ArtikelController extends Controller
@@ -54,12 +55,12 @@ class ArtikelController extends Controller
         $artikel->judul = $request->judul;
         $artikel->slug = str_slug($request->judul, '-');
         $artikel->konten = $request->konten;
+        $artikel->id_user = Auth::user()->id;
         $artikel->id_kategori = $request->id_kategori;
         // foto
         if ($request->hasFile('foto')) {
             $file = $request->file('foto');
-            $path = public_path() 
-            .'/assets/img/artikel';
+            $path = public_path() .'/assets/img/artikel';
             $filename = str_random(6) . '_'
             . $file->getClientOriginalName();
             $upload = $file->move(
@@ -68,7 +69,7 @@ class ArtikelController extends Controller
             $artikel->foto = $filename;
         }
         $artikel->save();
-        // $artikel->tag()->attach($request->tag);
+        $artikel->tag()->attach($request->tag);
         Session::flash("flash_notification",[
             "level" => "success",
             "message" => "Berhasil menyimpan <b>"
@@ -101,7 +102,7 @@ class ArtikelController extends Controller
         $kategori = Kategori::all();
         $tag = Tag::all();
         $select = $artikel->tag->pluck('id')->toArray();
-        return view('artikel.edit',compact('artikel','kategori','select','tag'));
+        return view('artikel.edit', compact('artikel','kategori','select','tag'));
     }
 
     /**
@@ -114,9 +115,8 @@ class ArtikelController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'judul' => 'required|unique:artikels',
+            'judul' => 'required',
             'konten' => 'required|min:50',
-            'foto' => 'required|mimes:jpeg,jpg,png,gif|max:2048',
             'id_kategori' => 'required',
             'tag' => 'required'
         ]);
@@ -129,7 +129,7 @@ class ArtikelController extends Controller
         // foto
         if ($request->hasFile('foto')) {
             $file = $request->file('foto');
-            $path = public_path() .'/assets/img/artikel';
+            $path = public_path() .'/assets/img/artikel/';
             $filename = str_random(6) . '_'
             . $file->getClientOriginalName();
             $uploadSuccess = $file->move(
@@ -139,7 +139,7 @@ class ArtikelController extends Controller
             if ($artikel->foto) {
                 $old_foto = $artikel->foto;
                 $filepath = public_path() .
-                    '/assets/img//' .
+                    '/assets/img/artikel/' .
                     $artikel->foto;
                 try {
                     File::delete($filepath);

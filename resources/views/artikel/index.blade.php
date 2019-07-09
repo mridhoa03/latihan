@@ -5,7 +5,7 @@
     <div class="row">
         <div class="col-12">
             <div class="card">
-                <h5 class="card-header">Data Tables Artikel</h5><br>
+                <h5 class="card-header">Data Artikel</h5><br>
                 <center>
                         <a href="{{ route('artikel.create') }}"
                             class="la la-cloud-upload btn btn-info btn-rounded btn-floating btn-outline">&nbsp;Tambah Data
@@ -17,6 +17,7 @@
                             <tr>
                                 <th>Judul</th>
                                 <th>Slug</th>
+                                <th>Tag</th>
                                 <th>Kategori</th>
                                 <th>Penulis</th>
                                 <th>Foto</th>
@@ -28,10 +29,13 @@
                             <tr>
                                 <td>{{$data->judul}}</td>
                                 <td>{{$data->slug}}</td>
+                                 <td>@foreach ($data->tag as $tag)
+                                    {{ $tag->nama_tag }}
+                                 @endforeach</td>
                                 <td>{{$data->kategori->nama_kategori}}</td>
                                 <td>{{$data->user->name}}</td>
                                 <td><img src="{{asset('assets/img/artikel/' .$data->foto. '')}}"
-                                    style="width:250px; height:250px;" alt="Foto"></td>
+                                    style="width:50px; height:50px;" alt="Foto"></td>
                                
 								<td style="text-align: center;">
                                     <form action="{{route('artikel.destroy', $data->id)}}" method="post">
@@ -41,10 +45,9 @@
                                     </a>
                                     <a href="{{route('artikel.show', $data->id)}}"
 										class="zmdi zmdi-eye btn btn-success btn-rounded btn-floating btn-outline"> Show
-                                    </a >
-                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+									</a>
 										<input type="hidden" name="_method" value="DELETE">
-										<button type="submit" class="zmdi zmdi-delete  btn-rounded btn-floating btn btn-dangerbtn btn-danger btn-outline"> Delete</button>
+										<button type="submit" class="zmdi zmdi-delete btn-rounded btn-floating btn btn-dangerbtn btn-danger btn-outline"> Delete</button>
 									</form>
 								</td>
                             </tr>
