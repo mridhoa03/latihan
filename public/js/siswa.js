@@ -29,14 +29,14 @@ $(function () {
     // Simpan Data
     $(".tombol-simpan").click(function (simpan) {
         simpan.preventDefault();
-        var nama = $("input[name=nama_kategori]").val()
-        // console.log(nama)
+        var variable_isian_nama = $("input[name=nama_kategori]").val()
+         console.log(nama)
         $.ajax({
             url: alamat,
             method: "POST",
             dataType: "json",
             data: {
-                nama_kategori:nama
+                nama_kategori:variable_isian_nama
             },
             success: function (berhasil) {
                 alert(berhasil.message)
