@@ -36,8 +36,12 @@ Route::get('/contact', function () {
 
 Route::group(['prefix'=>'admin','middleware'=>['auth']],
 function () {
-    route::resource('kategori','KategoriController');
-    route::resource('tag','TagController');
-    route::resource('artikel','ArtikelController');
+    Route::resource('kategori','KategoriController');
+    Route::resource('tag','TagController');
+    Route::resource('artikel','ArtikelController');
 }
 );
+
+Route::get('/siswa', function () {
+    return view('siswa');
+});

@@ -1,5 +1,12 @@
 @extends('layouts.app')
-
+@section('js')
+    <script src="{{asset('assets/assets/vendor/ckeditor/ckeditor.js')}}"></script>
+    <script src="{{asset('assets/assets/vendor/select2/select2.min.js')}}"></script>
+    <script src="{{asset('assets/assets/js/components/select2-init.js')}}"></script>
+    <script>
+        CKEDITOR.replace( 'editor1' );
+    </script>
+@endsection
 
 @section('content')
 <section class="page-content container-fluid">

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Ulama;
+use App\Siswa;
 class SiswaController extends Controller
 {
     /**
@@ -12,14 +12,15 @@ class SiswaController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function index(){
-        $siswa = Ulama::all();
-        $response = 
-            ['success' => true,
-             'data' => $siswa,
-             'message' => 'berhasil'
-            ];
-        return response()->json($siswa, 200);
+    public function index()
+    {
+        $siswa = Siswa::all();
+        $response = [
+            'success' => true,
+            'data' =>  $siswa,
+            'message' => 'Berhasil ditampilkan.'
+        ];
+        return response()->json($response, 200);
     }
 
     /**
@@ -40,42 +41,33 @@ class SiswaController extends Controller
      */
     public function store(Request $request)
     {
-       $siswa = new Ulama();
-       $siswa->nama = $request->nama; 
-       $siswa->alamat = $request->alamat;
-       $siswa->usia = $request->usia;
-       $siswa->sekolah = $request->sekolah;
-       $siswa->no_telp = $request->no_telp;
-       $siswa->save();
-       $response = [
-           'success' => true,
-           'data' => $siswa,
-           'message' => 'berhasil'
-       ];
-       return response()->json($response, 200);
+        $siswa = new Siswa();
+        $siswa->nama = $request->namasiswa;
+        $siswa->save();
+
+        $response = [
+            'success' => true,
+            'data' =>  $siswa,
+            'message' => 'Berhasil ditambahkan.'
+        ];
+        return response()->json($response, 200);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Siswa  $siswa
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
-        $siswa = Ulama::findOrFail($id);
-        $response = [
-            'success' => true,
-            'data' => $siswa,
-            'message' => 'berhasil'
-        ];
-        return response()->json($siswa, 200);
+        //
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Siswa  $siswa
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -87,39 +79,28 @@ class SiswaController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Siswa  $siswa
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
     {
-        $siswa = Ulama::findOrFail ($id) ;
-        $siswa->nama = $request->nama;
-        $siswa->alamat = $request->alamat;
-        $siswa->usia = $request->usia;
-        $siswa->sekolah = $request->sekolah;
-        $siswa->no_telp = $request->no_telp;
-        $siswa->save();
-        $response = [
-            'success' => true,
-            'data' => $siswa,
-            'message' => 'berhasil'
-        ];
-        return response()->json($response, 200);
+        //
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Siswa  $siswa
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        $siswa = Ulama::findOrFail($id)->delete();
+        $siswa = Siswa::find($id)->delete($id);
+
         $response = [
             'success' => true,
-            'data' => $siswa,
-            'message' => 'berhasil'
+            'data' =>  $siswa,
+            'message' => 'Berhasil dihapus.'
         ];
         return response()->json($response, 200);
     }
