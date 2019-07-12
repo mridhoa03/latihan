@@ -67,9 +67,9 @@
                                     </div>
                                     <div class="form-group">
                                             <label for="">Konten</label>
-                                            <textarea class="form-control 
+                                            <textarea class="form-control ckeditor 
                                             @error('konten') is-invalid @enderror"
-                                            name="konten" id="texteditor" required>
+                                            name="konten" required>
                                             </textarea>
                                             @error('konten')
                                             <span class="invalid-feedback" role="alert">
