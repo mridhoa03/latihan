@@ -16,7 +16,12 @@ $(function () {
             $.each(berhasil.data, function (key, value) {
                 $(".data-siswa").append(
                     `
-                    <li>${value.nama} <button class="btn btn-danger btn-sm hapus-data" data-id="${value.id}">Hapus</button></li>
+                    <tr>
+                    <td>${value.nama}</td>
+                    <td>
+                    <button class="btn btn-danger btn-sm hapus-data" data-id="${value.id}">Hapus</button>
+                    </td>
+                    </tr>
                     `
                 )
             })

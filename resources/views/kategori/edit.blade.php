@@ -1,31 +1,27 @@
-@extends('layouts.app')
-
-@section('content')
-<div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-8">
-                <div class="card">
-                    <center>
-                        <div class="card-header">Tambah Kategori</div>
-                    </center>
-    
-                    <div class="card-body">
-                        <form action="{{route('kategori.update', $kategori->id)}}" method="post">
-                            <input type="hidden" name="_method" value="PATCH">
-                            {{csrf_field()}}
-                            <div class="form-group">
-                                <label for="">Nama</label>
-                                <input class="form-control" type="text" name="nama_kategori" id="" value="{{$kategori->nama_kategori}}">
-                            </div>
-                            <div class="form-group">
-                                <button type="submit" class="btn btn-outline-info">
-                                    Simpan Data
-                                </button>
-                            </div>
-                        </form>
-                    </div>
+<div class="container kategoriEdit" id="editFormKategori" style="display: none;">
+    <div class="row justify-content-center">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">Dashboard
+                    <button type="button" class="btn-sm btn btn-primary float-right" id="backViewKategori">
+                        Kembali
+                    </button>
+                </div>
+                <div class="card-body">
+                    <form class="myFormEdit" method="post">
+                        <input type="hidden" name="id" id="id">
+                        <input type="hidden" name="_method" value="PATCH">
+                        @csrf
+                        <div class="form-group">
+                            <label for="">Nama Kategori</label>
+                            <input type="text" id="nama_kategori" name="nama_kategori" class="form-control nama_kategori" required>
+                        </div>
+                        <div class="form-group">
+                            <button class="btn btn-success" type="submit">Save</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
     </div>
-@endsection
+</div>

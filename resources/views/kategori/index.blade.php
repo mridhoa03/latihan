@@ -1,50 +1,115 @@
 @extends('layouts.app')
 @section('content')
-<section class="page-content container-fluid">
-    <div class="row">
-        <div class="col-12">
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
             <div class="card">
-                <h5 class="card-header">Data Tables Kategori</h5><br>
-                <center>
-                        <a href="{{ route('kategori.create') }}"
-                            class="la la-cloud-upload btn btn-info btn-rounded btn-floating btn-outline">&nbsp;Tambah Data
-                        </a>
-                </center>
+                <div class="card-header">Data Kategori
+                    <button class="btn btn-sm btn-success float-right" data-toggle="modal" data-target="#modalTambah">Tambah</button>
+                </div>
                 <div class="card-body">
-                    <table id="bs4-table" class="table table-striped table-bordered" style="width:100%">
-                        <thead>
-                            <tr>
-                                <th>Nama Kategori</th>
-                                <th>Slug</th>
-                                <th style="text-align: center;">Aksi</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($kategori as $data)
-                            <tr>
-                                <td>{{$data->nama_kategori}}</td>
-                                <td>{{$data->slug}}</td>
-                               
-								<td style="text-align: center;">
-                                    <form action="{{route('kategori.destroy', $data->id)}}" method="post">
-                                        {{csrf_field()}}
-									<a href="{{route('kategori.edit', $data->id)}}"
-										class="zmdi zmdi-edit btn btn-warning btn-rounded btn-floating btn-outline"> Edit
-									</a>
-                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-										<input type="hidden" name="_method" value="DELETE">
-										<button type="submit" class="zmdi zmdi-delete btn-rounded btn-floating btn btn-dangerbtn btn-danger btn-outline"> Delete</button>
-									</form>
-								</td>
-                            </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Nama kategori</th>
+                                    <th>Slug</th>
+                                    <th>Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody id="data-kategori">
 
-
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</section>
+</div>
+@include('kategori.create')
+@include('kategori.edit')
 @endsection
+
+
+@push('scripts')
+<script>
+    $(document).ready(function () {
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        var alamat = '/api/kategori'
+        // Get Data kategori
+        $.ajax({
+            url: alamat,
+            method: "GET",
+            dataType: "json",
+            success: function (berhasil) {
+                console.log(berhasil)
+                $.each(berhasil.data, function (key, value) {
+                    $("#data-kategori").append(
+                        `
+                        <tr>
+                            <td>${value.nama_kategori}</td>
+                            <td>${value.slug}</td>
+                            
+                        </tr>
+                        `
+                    )
+                })
+            },
+            error: function () {
+                console.log('data tidak ada');
+            }
+        });
+    });
+    // Tambah Data
+    $('#createData').submit(function(e){
+        var formData    = new FormData($('#createData')[0]);
+        e.preventDefault();
+        $.ajax({
+            url: "/api/kategori",
+            type:'POST',
+            data:formData,
+            cache: true,
+            contentType: false,
+            processData: false,
+            async:false,
+            dataType: 'json',
+            success:function(formData){
+                $('#modalTambah').modal('hide');
+                alert(formData.message)
+                location.reload();
+            },
+            complete: function() {
+                $("#createData")[0].reset();
+            }
+        });
+    });
+    // Edit Data
+    function Edit(id){
+    }
+    // Hapus Data
+    $(".table").on('click', '#hapus-data', function () {
+        var id = $(this).data("id");
+        // alert(id)
+        $.ajax({
+            url: '/api/kategori/'+id,
+            method: "DELETE",
+            dataType: "json",
+            data: {
+                id: id
+            },
+            success: function (berhasil) {
+                alert(berhasil.message)
+                location.reload();
+            },
+            error: function (gagal) {
+                console.log(gagal)
+            }
+        })
+    })
+</script>
+@endpush

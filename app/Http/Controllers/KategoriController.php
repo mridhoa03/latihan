@@ -1,11 +1,7 @@
 <?php
-
 namespace App\Http\Controllers;
-
 use Illuminate\Http\Request;
 use App\Kategori;
-use Session;
-
 class KategoriController extends Controller
 {
     /**
@@ -15,10 +11,18 @@ class KategoriController extends Controller
      */
     public function index()
     {
-        $kategori = Kategori::orderBy('created_at','desc')->get();
-        return view('kategori.index', compact('kategori'));
+        $kategori = Kategori::all();
+        $response = [
+            'success' => true,
+            'data' => $kategori,
+            'message' => 'berhasil'
+        ];
+        return response()->json($response, 200);
     }
-
+    public function json()
+    {
+        return view('kategori.index');
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -26,9 +30,8 @@ class KategoriController extends Controller
      */
     public function create()
     {
-        return view ('kategori.create');
+        //
     }
-
     /**
      * Store a newly created resource in storage.
      *
@@ -37,21 +40,17 @@ class KategoriController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'nama_kategori' => 'required|unique:kategoris'
-        ]);
-        $kategori = new Kategori();
+        $kategori = new Kategori;
         $kategori->nama_kategori = $request->nama_kategori;
-        $kategori->slug = str_slug($request->nama_kategori, '-');
+        $kategori->slug = str_slug($request->nama_kategori);
         $kategori->save();
-        Session::flash("flash_notification",[
-            "level" => "success",
-            "message" => "Berhasil menyimpan<b>"
-                         . $kategori->nama_kategori."</b>"
-        ]);
-        return redirect()->route('kategori.index');
+        $response = [
+            'success' => true,
+            'data' => $kategori,
+            'message' => 'berhasil'
+        ];
+        return response()->json($response, 200);
     }
-
     /**
      * Display the specified resource.
      *
@@ -60,9 +59,14 @@ class KategoriController extends Controller
      */
     public function show($id)
     {
-        //
+        $kategori = Kategori::findOrFail($id);
+        $response = [
+            'success' => true,
+            'data' => $kategori,
+            'message' => 'berhasil'
+        ];
+        return response()->json($response, 200);
     }
-
     /**
      * Show the form for editing the specified resource.
      *
@@ -71,10 +75,8 @@ class KategoriController extends Controller
      */
     public function edit($id)
     {
-        $kategori = Kategori::findOrfail($id);
-        return view('kategori.edit',compact('kategori'));
+        //
     }
-
     /**
      * Update the specified resource in storage.
      *
@@ -84,21 +86,8 @@ class KategoriController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $request->validate([
-            'nama_kategori' => 'required'
-        ]);
-        $kategori = Kategori::findOrfail($id);
-        $kategori->nama_kategori = $request->nama_kategori;
-        $kategori->slug = str_slug($request->nama_kategori, '-');
-        $kategori->save();
-        Session::flash("flash_notification",[
-            "level" => "success",
-            "message" => "Berhasil mengedit<b>"
-                         . $kategori->nama_kategori."</b>"
-        ]);
-        return redirect()->route('kategori.index');
+        //
     }
-
     /**
      * Remove the specified resource from storage.
      *
@@ -107,13 +96,12 @@ class KategoriController extends Controller
      */
     public function destroy($id)
     {
-        $kategori = Kategori::findOrfail($id)->delete();
-        Session::flash("flash_notification",[
-             "level" => "Success",
-             "message" => "Berhasil menghapus<b>"
-                          . $kategori->nama_kategori."</b>"
-         ]);
-        return redirect()->route('kategori.index');
-
+        $kategori = Kategori::findOrFail($id)->delete();
+        $response = [
+            'success' => true,
+            'data' => $kategori,
+            'message' => 'berhasil'
+        ];
+        return response()->json($response, 200);
     }
 }

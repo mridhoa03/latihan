@@ -87,6 +87,7 @@
     </div>
     <script src="{{ asset('js/jquery/jquery-2.2.4.min.js') }}"></script>
     <script src="{{ asset('js/siswa.js') }}"></script>
+    <script src="{{ asset('assets/ckeditor/ckeditor.js') }}"></script>
     @stack('script')
 </body>
 </html>

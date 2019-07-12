@@ -60,7 +60,7 @@
                                     <a class="nav-link" href="/admin/artikel">Artikel</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="/admin/kategori">Kategori</a>
+                                    <a class="nav-link" href="/kategori">Kategori</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="/admin/tag">Tag</a>
