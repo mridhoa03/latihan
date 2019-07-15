@@ -18,9 +18,10 @@ $(function () {
                     `
                     <tr>
                     <td>${value.nama}</td>
-                    <td>
+                    <td><center>
                     <button class="btn btn-danger btn-sm hapus-data" data-id="${value.id}">Hapus</button>
                     </td>
+                    </center>
                     </tr>
                     `
                 )

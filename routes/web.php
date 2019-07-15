@@ -37,14 +37,13 @@ Route::get('/contact', function () {
 Route::get('/siswa', function () {
     return view('siswa');
 });
-Route::get('/kategori', function () {
-    return view('kategori.index');
-});
+
 
 Route::group(['prefix'=>'admin','middleware'=>['auth']],
 function () {
     // Route::resource('kategori','KategoriController');
-    Route::resource('tag','TagController');
-    Route::resource('artikel','ArtikelController');
+    Route::resource('/tag','TagController');
+    Route::resource('/artikel','ArtikelController');
+    Route::resource('/kategori','KategoriController');
 }
 );

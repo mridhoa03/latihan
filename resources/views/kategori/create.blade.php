@@ -1,27 +1,30 @@
-<!-- Modal -->
-<div class="modal fade" id="modalTambah" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Tambah Kategori</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <form id="createData" method="POST">
-            <div class="modal-body">
+@extends('layouts.app')
 
-                    @csrf
-                <div class="form-group">
-                    <label for="">Nama Kategori</label>
-                    <input type="text" name="nama_kategori" id="nama_kategori" class="form-control" required>
+@section('content')
+<div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-12">
+                <div class="card">
+                    <center>
+                        <div class="card-header">Tambah Kategori</div>
+                    </center>
+    
+                    <div class="card-body">
+                        <form action="{{route('kategori.store')}}" method="post">
+                            {{csrf_field()}}
+                            <div class="form-group">
+                                <label for="">Nama</label>
+                                <input class="form-control" type="text" name="nama_kategori" id="">
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-outline-info">
+                                    Simpan Data
+                                </button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-primary">Save changes</button>
-            </div>
-        </form>
         </div>
     </div>
-</div>
+@endsection
