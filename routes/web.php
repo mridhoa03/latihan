@@ -18,16 +18,16 @@ Route::get('/', function () {
     return view('index');
 });
 
-Route::get('/category', function () {
-    return view('category');
+Route::get('/about', function () {
+    return view('about');
 });
 
-Route::get('/blog', function () {
-    return view('blog');
+Route::get('/menu', function () {
+    return view('menu');
 });
 
-Route::get('/regular', function () {
-    return view('regular');
+Route::get('/blog-home', function () {
+    return view('blog-home');
 });
 
 Route::get('/contact', function () {
